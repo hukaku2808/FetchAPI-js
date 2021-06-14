@@ -1,0 +1,1 @@
+let promise = fetch('https://api.coingecko.com/api/v3/ping', {}).then(response => console.log(response));
