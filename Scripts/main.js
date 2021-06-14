@@ -1,4 +1,4 @@
-fetch('https://api.coingecko.com/api/v3/coins/markets?vs_currency=nzd&order=market_cap_desc&per_page=100&page=1&sparkline=false&price_change_percentage=24h')
+fetch('https://api.coingecko.com/api/v3/coins/markets?vs_currency=nzd&order=market_cap_desc&per_page=100&page=1&sparkline=true&price_change_percentage=24h&market_cap_desc')
     .then(response => {
         response.json().then(data => {
             console.log(data);
@@ -6,11 +6,15 @@ fetch('https://api.coingecko.com/api/v3/coins/markets?vs_currency=nzd&order=mark
                 var temp = "";
                 data.forEach(itemData => {
                     temp += "<tr>";
-                    temp += "<td>" + itemData.id + "</td>";
+                    temp += "<td>" + "<img width='50px' height='50px'src=" + itemData.image + " </td>";
+                    temp += "<td>" + itemData.symbol + "</td>";
                     temp += "<td>" + itemData.name + "</td>";
-                    temp += "<td>" + itemData.current_price + "</td>";
-                    temp += "<td>" + itemData.market_cap + "</td></tr>";
+                    temp += "<td>" + '$' + itemData.current_price + "</td>";
+                    temp += "<td>" + itemData.market_cap_change_percentage_24h + '%' + "</td>";
+                    temp += "<td>" + '$' + itemData.market_cap + "</td>";
+                    "</tr>";
                 });
+
                 document.getElementById('data').innerHTML = temp;
             }
         }
