@@ -16,6 +16,8 @@ fetch('https://api.coingecko.com/api/v3/coins/markets?vs_currency=nzd&order=mark
                     temp += "<td>" + '$' + itemData.current_price + "</td>";
                     temp += "<td>" + itemData.market_cap_change_percentage_24h + '%' + "</td>";
                     temp += "<td>" + '$' + itemData.market_cap + "</td>";
+                    temp += "<td>" + itemData.last_updated + "</td>";
+
                     "</tr>";
                 });
                 //  Get id from table in HTML document and display api data
@@ -31,3 +33,4 @@ fetch('https://api.coingecko.com/api/v3/coins/markets?vs_currency=nzd&order=mark
         }
         )
     }).catch((error) => console.error("FETCH ERROR:", error));
+
