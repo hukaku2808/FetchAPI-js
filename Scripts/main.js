@@ -5,9 +5,9 @@ let promise1 = fetch('https://api.coingecko.com/api/v3/coins/markets?vs_currency
 // Check if api data is being fetched
 promise1.then((data) => {
     if (data.ok) {
-        console.log("Success");
+        console.log("Success!");
     } else {
-        console.log("ERROR")
+        console.log("Error!")
     }
     // expected output: "Success!"
 });
