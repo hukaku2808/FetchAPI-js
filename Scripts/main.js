@@ -1,5 +1,5 @@
 // Fetch crypto coins from coingecko api
-const settings = fetch('https://api.coingecko.com/api/v3/coins/markets?vs_currency=nzd&order=market_cap_desc&per_page=100&page=1&sparkline=true&price_change_percentage=24h&market_cap_desc', {
+const settings = fetch('https://api.coingecko.com/api/v3/coins/markets?vs_currency=nzd&order=market_cap_desc&per_page=50&page=1&sparkline=true&price_change_percentage=24h&market_cap_desc', {
     "method": "GET",
     "headers": {
         "x-rapidapi-key": "b8a3cbe47fmsh9d0f2c80fbfd09dp1b1c1cjsn055f4cf06374",
