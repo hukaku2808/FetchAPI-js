@@ -1,7 +1,11 @@
 // Fetch crypto coins from coingecko api
-fetch('https://api.coingecko.com/api/v3/coins/markets?vs_currency=nzd&order=market_cap_desc&per_page=100&page=1&sparkline=true&price_change_percentage=24h&market_cap_desc')
+const settings = fetch('https://api.coingecko.com/api/v3/coins/markets?vs_currency=nzd&order=market_cap_desc&per_page=100&page=1&sparkline=true&price_change_percentage=24h&market_cap_desc', {
+    "x-rapidapi-key": "b8a3cbe47fmsh9d0f2c80fbfd09dp1b1c1cjsn055f4cf06374",
+    "x-rapidapi-host": "coingecko.p.rapidapi.com"
+})
     // Check if api data is being fetched
     .then(response => {
+
         response.json().then(data => {
             console.log(data);
             if (data.length > 0) {
@@ -33,4 +37,3 @@ fetch('https://api.coingecko.com/api/v3/coins/markets?vs_currency=nzd&order=mark
         }
         )
     }).catch((error) => console.error("FETCH ERROR:", error));
-
