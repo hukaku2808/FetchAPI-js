@@ -13,9 +13,9 @@
 </head>
 
 <body class="dark-mode">
-    <nav class="navbar navbar-expand-lg navbar-dark" style="background-color: #47003c;">
+    <nav class="navbar navbar-expand-lg navbar-dark" style="background-color: #343135;">
         <div class="container-fluid">
-            <a class="navbar-brand" href="#">Navbar</a>
+            <a class="navbar-brand" href="#">Crypto Currency Prices</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
@@ -38,31 +38,39 @@
 
     <!-- Page Conatainer -->
     <div class="container">
-
-        <!-- Heading -->
-        <h1>Crypto Currency Prices</h1>
         <br>
         <!-- Global Market Data -->
-        <table class="table">
-            <p class="market-table-text"><b>Global Market Data</b></p>
-            <tbody id="globalTableBody">
-                <tr class="content-row">
-                    <td><span class="boldText">Coins: </span><span id="coinSpan"></span></td>
-                    <td><span class="boldText">Exchanges: </span><span id="exchangesSpan"></span></td>
-                    <td><span class="boldText">Total Market Cap: </span><span id="totalMarketCapSpan"></span>
-                        <span id="totalMarketCapSpanPercent"></span></td>
-                    <td><span class="boldText">24h Vol: </span><span id="_24hVolSpan"></span></td>
-                    <td class="text-right"><span class="boldText">Dominance: </span><span id="btcSpan"></span>
-                        <span id="ethSpan"></span></td>
-                </tr>
-            </tbody>
-        </table>
+        <div class="card text-white" style="background-color: #343135;">
+            <div class="card-header text-center">
+                Global Market Data
+            </div>
+            <div class="card-body">
+                <table class="table">
+                    <tbody id="globalTableBody">
+                        <tr class="content-row">
+                            <td><span class="boldText">Coins: </span><span id="coinSpan"></span></td>
+                            <td><span class="boldText">Exchanges: </span><span id="exchangesSpan"></span></td>
+                            <td><span class="boldText">Total Market Cap: </span><span id="totalMarketCapSpan"></span>
+                                <span id="totalMarketCapSpanPercent"></span></td>
+                            <td><span class="boldText">24h Vol: </span><span id="_24hVolSpan"></span></td>
+                            <td class="text-right"><span class="boldText">Dominance: </span><span id="btcSpan"></span>
+                                <span id="ethSpan"></span></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
         <br>
         <!-- Coin Table -->
-        <table class="table table-responsive">
-            <thead>
-                <tr>
-                    <th class="text-center" scope="col"><a href="#" class="sortable" name="market_cap_rank">Rank</th>
+        <div class="card text-white" style="background-color: #343135;">
+            <div class="card-header text-center">
+                Coin Price Chart
+            </div>
+            <div class="card-body">
+                <table class="table align-middle">
+                    <thead>
+                        <tr>
+                            <th class="text-center" scope="col"><a href="#" class="sortable" name="market_cap_rank">Rank</th>
                     <th class="text-center" scope="col"><a href="#" class="sortable" name="name">Name</th>
                     <th class="text-center" scope="col"><a href="#" class="sortable" name="current_price">Price</th>
                     <th class="text-center" scope="col"><a href="#" class="sortable" name="market_cap">Market Cap</th>
@@ -73,9 +81,14 @@
                     <th class="text-right" scope="col"><a href="#" class="sortable"
                             name="price_change_percentage_24h">Price Change (24h)</th>
                 </tr>
-            </thead>
-            <tbody id="coinTableBody"></tbody>
-        </table>
+                </thead>
+                <tbody id="coinTableBody"></tbody>
+                </table>
+            </div>
+        <div class="card-footer text-muted">
+          2 days ago
+        </div>
+        </div>
     </div>
 
 
