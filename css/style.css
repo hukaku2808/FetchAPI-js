@@ -64,6 +64,7 @@ a:active {
 
 #coinTableBody {
     color: white;
+    font-size: 19px;
 }
 
 #exchangeTableBody {
@@ -72,5 +73,12 @@ a:active {
 
 #globalTableBody {
     color: white;
-    font-size: 0.9em;
+    font-size: 1.3em;
+    font-weight: bold;
+    text-align: center;
+}
+
+#coinTableBody #change {
+    font-size: 20px;
+    text-align: center;
 }
