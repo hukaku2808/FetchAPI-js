@@ -1,7 +1,7 @@
 /* Global Variables */
-if (ethereum) {
-    ethereum.autoRefreshOnNetworkChange = true;  //avoids MetaMask errors in console.
-};
+/* if (ethereum) {
+ethereum.autoRefreshOnNetworkChange = false; //avoids MetaMask errors in console.
+}; */
 let coinID = location.search.slice(1);
 let coinsPerPage = 100; // assign 100 to ammount of crypto coins per page
 let currentPage = 1;
@@ -102,7 +102,7 @@ async function refreshCoinTableBody() {
 // Pagination
 // Show data on next page
 
-$("#nAnchor").click(async () => {
+$("#nAnchor").click(async() => {
     currentPage++;
     COIN_DATA_ENDPOINT =
         `/ coins / markets ? vs_currency = nzd & order=market_cap_desc & per_page=${coinsPerPage} & page=${currentPage} & sparkline=false`;
@@ -110,7 +110,7 @@ $("#nAnchor").click(async () => {
     await refreshCoinTableBody();
     fadePrev();
 });
-$("#pAnchor").click(async () => {
+$("#pAnchor").click(async() => {
     currentPage--;
     COIN_DATA_ENDPOINT =
         `/ coins / markets ? vs_currency = nzd & order=market_cap_desc & per_page=${coinsPerPage} & page=${currentPage} & sparkline=false`;
@@ -169,7 +169,7 @@ function sortData(data, headerName, order) {
 }
 
 function sortAscending(data, headerName) {
-    data.sort(function (a, b) {
+    data.sort(function(a, b) {
         if (a[headerName] > b[headerName]) {
             return 1;
         } else if (a[headerName] < b[headerName]) {
@@ -182,7 +182,7 @@ function sortAscending(data, headerName) {
 }
 
 function sortDescending(data, headerName) {
-    data.sort(function (a, b) {
+    data.sort(function(a, b) {
         if (a[headerName] > b[headerName]) {
             return -1;
         } else if (a[headerName] < b[headerName]) {
