@@ -48,7 +48,7 @@ function generateCoinTableBody(data) {
         $('#coinTableBody').append(
             $('<tr class="content-row"></tr>').append(
                 $('<td class="text-center"></td>').text(data[apiKey].market_cap_rank),
-                $('<td id="specific" class="text-left"></td>').append(
+                $('<td id="specific" class="text-center"></td>').append(
                     $('<div></div>').append(
                         `<img src="${data[apiKey].image}" width="25"> <a href="/coinDetails.html?${data[apiKey].id}">
             ${data[apiKey].name}</a>`)),
@@ -71,8 +71,8 @@ function generateCoinTableBody(data) {
                     : "text-danger"
                     } 
         text-right'></td>`).text(
-                        Number(data[apiKey].price_change_percentage_24h).toFixed(2) + "%"
-                    )
+                    Number(data[apiKey].price_change_percentage_24h).toFixed(2) + "%"
+                )
             )
         );
     }
@@ -119,7 +119,7 @@ async function refreshCoinTableBody() {
 
 // Pagination
 
-$("#nAnchor").click(async () => {
+$("#nAnchor").click(async() => {
     currentPage++;
     COIN_DATA_ENDPOINT = `/coins/markets?vs_currency=nzd&order=market_cap_desc&per_page=${coinsPerPage}&page=${currentPage}&sparkline=false`;
     coinUrl = BASE_URL + COIN_DATA_ENDPOINT;
@@ -127,7 +127,7 @@ $("#nAnchor").click(async () => {
     fadePrev();
 });
 
-$("#pAnchor").click(async () => {
+$("#pAnchor").click(async() => {
     currentPage--;
     COIN_DATA_ENDPOINT = `/coins/markets?vs_currency=nzd&order=market_cap_desc&per_page=${coinsPerPage}&page=${currentPage}&sparkline=false`;
     coinUrl = BASE_URL + COIN_DATA_ENDPOINT;
@@ -185,7 +185,7 @@ function sortData(data, headerName, order) {
 }
 
 function sortAscending(data, headerName) {
-    data.sort(function (a, b) {
+    data.sort(function(a, b) {
         if (a[headerName] > b[headerName]) {
             return 1;
         } else if (a[headerName] < b[headerName]) {
@@ -198,7 +198,7 @@ function sortAscending(data, headerName) {
 }
 
 function sortDescending(data, headerName) {
-    data.sort(function (a, b) {
+    data.sort(function(a, b) {
         if (a[headerName] > b[headerName]) {
             return -1;
         } else if (a[headerName] < b[headerName]) {
