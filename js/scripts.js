@@ -1,11 +1,15 @@
 // Globals
+let coinID = location.search.slice(1);
 let coinsPerPage = 100;
 let currentPage = 1;
 let BASE_URL = `https://api.coingecko.com/api/v3`;
 let MARKET_DATA_ENDPOINT = `/global`; // global Data API
 let COIN_DATA_ENDPOINT = `/coins/markets?vs_currency=nzd&order=market_cap_desc&per_page=${coinsPerPage}&page=${currentPage}&sparkline=false`;
+let COIN_DETAILS_ENDPOINT =
+    `/coins/${coinID}?localization=false&tickers=true&market_data=true&community_data=false&developer_data=false&sparkline=false`;
 let coinUrl = BASE_URL + COIN_DATA_ENDPOINT; // assign coingecko api coins markets to coinurl
 let marketUrl = BASE_URL + MARKET_DATA_ENDPOINT; // set market data to marketurl
+let detailsUrl = BASE_URL + COIN_DETAILS_ENDPOINT;
 let sortOrder = {
     column: "market_cap",
     order: "DESC",
@@ -16,6 +20,8 @@ $(document).ready(() => {
     refreshMarketTableBody();
     refreshCoinTableBody();
     fadePrev();
+    getApiData();
+
 });
 
 // Generate the table body for displaying api data
@@ -40,7 +46,7 @@ function generateCoinTableBody(data) {
                 $('<td class="text-center"></td>').text(data[apiKey].market_cap_rank),
                 $('<td id="specific" class="text-left"></td>').append(
                     $('<div></div>').append(
-                        `<img src="${data[apiKey].image}" width="25"> <a href="/"?${data[apiKey].id}">
+                        `<img src="${data[apiKey].image}" width="25"> <a href="/coinDetails.html?${data[apiKey].id}">
             ${data[apiKey].name}</a>`)),
                 $('<td class="text-left boldText"></td>').text(
                     "$" + number.format(data[apiKey].current_price.toFixed(2))
@@ -61,8 +67,8 @@ function generateCoinTableBody(data) {
                     : "text-danger"
                     } 
         text-right'></td>`).text(
-                    Number(data[apiKey].price_change_percentage_24h).toFixed(2) + "%"
-                )
+                        Number(data[apiKey].price_change_percentage_24h).toFixed(2) + "%"
+                    )
             )
         );
     }
@@ -109,7 +115,7 @@ async function refreshCoinTableBody() {
 
 // Pagination
 
-$("#nAnchor").click(async() => {
+$("#nAnchor").click(async () => {
     currentPage++;
     COIN_DATA_ENDPOINT = `/coins/markets?vs_currency=nzd&order=market_cap_desc&per_page=${coinsPerPage}&page=${currentPage}&sparkline=false`;
     coinUrl = BASE_URL + COIN_DATA_ENDPOINT;
@@ -117,7 +123,7 @@ $("#nAnchor").click(async() => {
     fadePrev();
 });
 
-$("#pAnchor").click(async() => {
+$("#pAnchor").click(async () => {
     currentPage--;
     COIN_DATA_ENDPOINT = `/coins/markets?vs_currency=nzd&order=market_cap_desc&per_page=${coinsPerPage}&page=${currentPage}&sparkline=false`;
     coinUrl = BASE_URL + COIN_DATA_ENDPOINT;
@@ -175,7 +181,7 @@ function sortData(data, headerName, order) {
 }
 
 function sortAscending(data, headerName) {
-    data.sort(function(a, b) {
+    data.sort(function (a, b) {
         if (a[headerName] > b[headerName]) {
             return 1;
         } else if (a[headerName] < b[headerName]) {
@@ -188,7 +194,7 @@ function sortAscending(data, headerName) {
 }
 
 function sortDescending(data, headerName) {
-    data.sort(function(a, b) {
+    data.sort(function (a, b) {
         if (a[headerName] > b[headerName]) {
             return -1;
         } else if (a[headerName] < b[headerName]) {
@@ -199,3 +205,42 @@ function sortDescending(data, headerName) {
     });
     return data;
 }
+/* Coin Details  */
+function generateListElements(data) {
+    let number = Intl.NumberFormat("en-US");
+    $('#coinList').html(""); //clears list
+    $('#coinList').append(
+        $('<li class="list-group-item"></li>').text("Name: " + data.name),
+        $('<li class="list-group-item"></li>').html(
+            `<coingecko-coin-price-chart-widget  coin-id="${data.name}" currency="usd" height="300" locale="en" background-color="#1A1717"></coingecko-coin-price-chart-widget>`
+        ),
+        $('<li class="list-group-item"></li>').html(
+            `<coingecko-coin-market-ticker-list-widget  coin-id="${data.name}" currency="usd" height="300" locale="en" background-color="#1A1717"></coingecko-coin-market-ticker-list-widget>`
+        ),
+        $('<li class="list-group-item"></li>').text("Blocktime: " +
+            data.block_time_in_minutes + " minutes"),
+        $('<li class="list-group-item"></li>').text("Algorithm: " +
+            data.hashing_algorithm),
+        $('<li class="list-group-item"></li>').html("Description: " +
+            data.description.en),
+        $('<li class="list-group-item"></li>').html("Homepage: " +
+            data.links.homepage[0].link(data.links.homepage[0])),
+        $('<li class="list-group-item"></li>').text("Genesis: " + data.genesis_date),
+        $('<li class="list-group-item"></li>').text("All Time High: " + "$" +
+            number.format(data.market_data.ath.usd)),
+        $('<li class="text-danger list-group-item"></li>').text("From ATH: " +
+            Number(data.market_data.ath_change_percentage.usd).toFixed(2) + "%"),
+    );
+};
+
+function getApiData() {
+    fetch(detailsUrl)
+        .then(res => {
+            res.json().then(res => {
+                generateListElements(res);
+            })
+        })
+        .catch(err => {
+            console.log(err);
+        });
+};
