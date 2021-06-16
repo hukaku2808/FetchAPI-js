@@ -40,7 +40,7 @@ function generateCoinTableBody(data) {
                 $('<td class="text-center"></td>').text(data[apiKey].market_cap_rank),
                 $('<td id="specific" class="text-left"></td>').append(
                     $('<div></div>').append(
-                        `<img src="${data[apiKey].image}" width="25"> <a href="/coinDetails.html?${data[apiKey].id}">
+                        `<img src="${data[apiKey].image}" width="25"> <a href="/"?${data[apiKey].id}">
             ${data[apiKey].name}</a>`)),
                 $('<td class="text-right boldText"></td>').text(
                     "$" + number.format(data[apiKey].current_price.toFixed(2))
