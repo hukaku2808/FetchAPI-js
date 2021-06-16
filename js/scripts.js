@@ -212,7 +212,8 @@ function generateListElements(data) {
     $('#coinList').append(
         $('<li class="list-group-item"></li>').text("Name: " + data.name),
         $('<li class="list-group-item"></li>').html(
-            `<coingecko-coin-price-chart-widget  coin-id="${data.name}" currency="usd" height="300" locale="en" background-color="#1A1717"></coingecko-coin-price-chart-widget>`
+            `<coingecko-coin-price-chart-widget  coin-id="${data.id}" background-color="#1A1717" currency="nzd" locale="en" height="300" ">
+         </coingecko-coin-price-chart-widget>`
         ),
         $('<li class="list-group-item"></li>').html(
             `<coingecko-coin-market-ticker-list-widget  coin-id="${data.name}" currency="usd" height="300" locale="en" background-color="#1A1717"></coingecko-coin-market-ticker-list-widget>`
