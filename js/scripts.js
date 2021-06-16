@@ -42,27 +42,27 @@ function generateCoinTableBody(data) {
                     $('<div></div>').append(
                         `<img src="${data[apiKey].image}" width="25"> <a href="/"?${data[apiKey].id}">
             ${data[apiKey].name}</a>`)),
-                $('<td class="text-right boldText"></td>').text(
+                $('<td class="text-left boldText"></td>').text(
                     "$" + number.format(data[apiKey].current_price.toFixed(2))
                 ),
-                $('<td class="text-right"></td>').text(
+                $('<td class="text-left"></td>').text(
                     "$" + number.format(data[apiKey].market_cap)
                 ),
-                $('<td class="text-right"></td>').text(
+                $('<td class="text-center"></td>').text(
                     "$" + number.format(data[apiKey].total_volume)
                 ),
-                $('<td class="text-right"></td>').text(
+                $('<td class="text-center"></td>').text(
                     number.format(data[apiKey].circulating_supply.toFixed()) +
                     "  " +
                     data[apiKey].symbol.toUpperCase()
                 ),
-                $(`<td class='${data[apiKey].price_change_percentage_24h >= 0
+                $(`<td id="change" class='${data[apiKey].price_change_percentage_24h >= 0
                     ? "text-success"
                     : "text-danger"
                     } 
         text-right'></td>`).text(
-                        Number(data[apiKey].price_change_percentage_24h).toFixed(2) + "%"
-                    )
+                    Number(data[apiKey].price_change_percentage_24h).toFixed(2) + "%"
+                )
             )
         );
     }
@@ -109,7 +109,7 @@ async function refreshCoinTableBody() {
 
 // Pagination
 
-$("#nAnchor").click(async () => {
+$("#nAnchor").click(async() => {
     currentPage++;
     COIN_DATA_ENDPOINT = `/coins/markets?vs_currency=nzd&order=market_cap_desc&per_page=${coinsPerPage}&page=${currentPage}&sparkline=false`;
     coinUrl = BASE_URL + COIN_DATA_ENDPOINT;
@@ -117,7 +117,7 @@ $("#nAnchor").click(async () => {
     fadePrev();
 });
 
-$("#pAnchor").click(async () => {
+$("#pAnchor").click(async() => {
     currentPage--;
     COIN_DATA_ENDPOINT = `/coins/markets?vs_currency=nzd&order=market_cap_desc&per_page=${coinsPerPage}&page=${currentPage}&sparkline=false`;
     coinUrl = BASE_URL + COIN_DATA_ENDPOINT;
@@ -175,7 +175,7 @@ function sortData(data, headerName, order) {
 }
 
 function sortAscending(data, headerName) {
-    data.sort(function (a, b) {
+    data.sort(function(a, b) {
         if (a[headerName] > b[headerName]) {
             return 1;
         } else if (a[headerName] < b[headerName]) {
@@ -188,7 +188,7 @@ function sortAscending(data, headerName) {
 }
 
 function sortDescending(data, headerName) {
-    data.sort(function (a, b) {
+    data.sort(function(a, b) {
         if (a[headerName] > b[headerName]) {
             return -1;
         } else if (a[headerName] < b[headerName]) {
