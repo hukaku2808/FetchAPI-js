@@ -2,18 +2,22 @@
 let coinID = location.search.slice(1);
 let coinsPerPage = 100;
 let currentPage = 1;
-let BASE_URL = `https://api.coingecko.com/api/v3`;
-let MARKET_DATA_ENDPOINT = `/global`; // global Data API
-let COIN_DATA_ENDPOINT = `/coins/markets?vs_currency=nzd&order=market_cap_desc&per_page=${coinsPerPage}&page=${currentPage}&sparkline=false`;
-let COIN_DETAILS_ENDPOINT =
+const BASE_URL = `https://api.coingecko.com/api/`;
+const API_VERSION = '3';
+const MARKET_DATA_ENDPOINT = `/global`; // global Data API
+
+const COIN_DATA_ENDPOINT = `/coins/markets?vs_currency=nzd&order=market_cap_desc&per_page=${coinsPerPage}&page=${currentPage}&sparkline=false`;
+
+const COIN_DETAILS_ENDPOINT =
     `/coins/${coinID}?localization=false&tickers=true&market_data=true&community_data=false&developer_data=false&sparkline=false`;
-let coinUrl = BASE_URL + COIN_DATA_ENDPOINT; // assign coingecko api coins markets to coinurl
-let marketUrl = BASE_URL + MARKET_DATA_ENDPOINT; // set market data to marketurl
-let detailsUrl = BASE_URL + COIN_DETAILS_ENDPOINT;
+// let coinUrl = BASE_URL + COIN_DATA_ENDPOINT; // assign coingecko api coins markets to coinurl
 let sortOrder = {
     column: "market_cap",
     order: "DESC",
 };
+const coinUrl = `${BASE_URL}v${API_VERSION}` + `${COIN_DATA_ENDPOINT}`;
+const marketUrl = `${BASE_URL}v${API_VERSION}` + `${MARKET_DATA_ENDPOINT}`; // set market data to marketurl
+const detailsUrl = BASE_URL + 'v' + API_VERSION + COIN_DETAILS_ENDPOINT;
 
 $(document).ready(() => {
     document.body.classList.toggle("dark-mode");
